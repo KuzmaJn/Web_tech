@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('../fonts/static/NunitoSans_10pt-Regular.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'Nunito Sans Light';
+    src: url('../fonts/static/NunitoSans_10pt-ExtraLight.ttf') format('ttf');
+}
+
+html, body{
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1.1rem;
+    background-color: #EEEEEE;
+    margin: 0;
+    padding: 0;
+}
+
+img,
+picture,
+video {
+    max-width: 100%;
+}
+/*adjuting header*/
+header{
+    background-color: #134B70;
+    color: #EEEEEE;
+    height: 5vw;
+    padding: 1vw;
+    margin: 0;
+}
+
+header h1{
+    display:flex;
+    justify-content: center;
+    font-family: "Nunito Sans Light", monospace;
+    font-size: 6vw;
+    letter-spacing: 0.1rem;
+    margin: 0;
+    padding: 0;
+}
+/*adjuting navbar*/
+nav{
+    background-color: #134B70;
+    margin: 0;
+    padding: 0;
+    height: 5rem;
+    align-content: center;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.2);
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: None;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+nav a{
+    width: 70%;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: #EEEEEE;
+    text-decoration: none;
+    text-align: center;
+    outline-color: transparent;
+}
+nav a:link, a:visited,a:focus {
+    background: #134B70;
+    color: #EEEEEE;
+}
+
+nav a:hover {
+    background: #2e5683;
+    color: #EEEEEE;
+}
+
+nav a:active {
+    background: #508C9B;
+    color: white;
+}
+
+/*adjusting footer*/
+footer{
+    background-color: #134B70;
+    color: #EEEEEE;
+    height: 4rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+@media (max-width: 768px) {
+    nav{
+        height: 15rem;
+        align-content: center;
+    }
+
+    nav ul{
+        flex-direction: column;
+    }
+
+    nav ul li{
+        width: 70%;
+    }
+    nav a{
+        width: 100%;
+    }
+}
+

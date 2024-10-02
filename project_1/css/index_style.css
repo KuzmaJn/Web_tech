@@ -1,0 +1,53 @@
+
+/*adjuting main content*/
+main{
+    display: flex;
+    justify-content: center;
+    margin-left: 4vw;
+    margin-right: 4vw;
+
+}
+
+article{
+    flex: 1 1 20rem;
+    margin-right: 1rem;
+}
+
+article aside{
+    float: left;
+
+}
+aside img{
+    width: 15rem;
+    height: auto;
+    margin: 1rem 2rem 0 0;
+}
+
+article aside.float{
+    float: left;
+    width: 30%;
+    margin: 0 1.8rem 1.8rem 0;
+    background-color: #d0d0d0;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+@media (max-width: 992px) {
+    main{
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    article aside{
+        float:none;
+    }
+
+    article aside.float{
+        float: none;
+        width: 90%;
+    }
+}

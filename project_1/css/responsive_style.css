@@ -1,0 +1,44 @@
+main{
+    display: flex;
+    justify-content: center;
+}
+
+.relative-container{
+    position: relative;
+    margin: 2rem 0 2rem 0;
+
+}
+
+.relative-container img{
+    width: auto;
+    height: 80vh;
+}
+
+.pointing-div{
+    border: 0.1rem rgb(42, 112, 163) solid;
+    position: absolute;
+    border-radius: 1rem;
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+}
+
+.text-div{
+    display: none;
+    background-color: rgba(67, 77, 81, 0.53);
+    border-radius: 1rem;
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(-23%)
+}
+
+.description{
+    font-size: 0.5rem;
+    color: #FFFFFF;
+    transform: translateY(50%) translateX(15%);
+}
+
+.pointing-div:hover .text-div{
+    display: block;
+}
