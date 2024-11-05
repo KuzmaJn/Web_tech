@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html lang="sk">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenisové centrum</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/tennis-ball.ico" type="image/icontype">
+</head>
+<body>
+<form action="https://form2mail.iolab.sk/form2mail.php" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="apikey" value="fe61fe9ecd6db75dc32c1a65daf9827f">
+    <input type="hidden" name="from" value="">
+    <input type="hidden" name="subject" value="Potvrdenie objednávky Tenisové centrum">
+    <input type="hidden" name="redirectOk" value="https://webte1.fei.stuba.sk/~xkuzma/tynsky_chram/pages/success">
+    <input type="hidden" name="redirectFalse" value="https://webte1.fei.stuba.sk/~xkuzma/tynsky_chram/pages/fail">
+
+    <div class="form_row"><h2>Tenisové centrum</h2></div>
+    <fieldset>
+        <legend>Osobné údaje</legend>
+
+        <div class="form_row">
+            <div class="one_field">
+                <label for="name">Meno</label>
+                <input type="text" id="name" name="name" placeholder="Janko" required maxlength=30>
+                <div class="input_info">
+                    <span class="error" id="name-error"></span>
+                    <span class="remaining" id="name-remaining">30/30</span>
+                </div>
+
+            </div>
+
+            <div class="one_field">
+                <label for="surname">Priezvisko</label>
+                <input type="text" id="surname" name="sender" placeholder="Mrkvička" required maxlength=30>
+                <div class="input_info">
+                    <span class="error" id="surname-error"></span>
+                    <span class="remaining" id="surname-remaining">30/30</span>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="form_row">
+            <div class="two_field one_field">
+                <div class="one_field">
+                    <label for="dob">Dátum narodenia</label>
+                    <input type="date" id="dob" name="dob" required>
+                    <span class="error" id="dob-error"></span>
+                </div>
+
+                <div class="one_field">
+                    <label for="age">Vek</label>
+                    <input type="number" id="age" name="age" disabled>
+                    <span class="error" id="age-error"></span>
+                </div>
+            </div>
+            <div class="one_field">
+                <label for="sex">Pohlavie</label>
+                <select id="sex" name="sex" required>
+                    <option value="" disabled selected>--vyberte možnosť--</option>
+                    <option value="not-exteded">Neželám si uviesť</option>
+                    <option value="male">Muž</option>
+                    <option value="female">Žena</option>
+                </select>
+                <span class="error" id="sex-error"></span>
+            </div>
+        </div>
+
+        <div class="form_row">
+            <div class="one_field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="to" placeholder="formát: username@domain.tld" required maxlength=50>
+                <div class="input_info">
+                    <span class="error" id="email-error"></span>
+                    <span class="remaining" id="email-remaining">50/50</span>
+                </div>
+            </div>
+
+            <div class="one_field">
+                <label for="phone">Telefónne číslo</label>
+                <input type="tel" id="phone" name="phone" placeholder="formát: +421 XXX XXX XXX" required maxlength=15>
+                <div class="input_info">
+                    <span class="error" id="phone-error"></span>
+                    <span class="remaining" id="phone-remaining">15/15</span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Výber služby</legend>
+
+        <div class="one_field">
+            <label for="discount">Som držiteľ</label>
+            <select id="discount" name="card" required>
+                <option value="" disabled selected>--vyberte možnosť--</option>
+                <option value="isic">ISIC - študentský preukaz</option>
+                <option value="multisport">Multisport karta</option>
+                <option value="none">Nič z uvedeného</option>
+            </select>
+            <span class="error" id="discount-error"></span>
+        </div>
+
+        <div class="form_row">
+
+            <div class="one_field" id='select-sport' style="display: none">
+            <label for="sport">Šport</label>
+            <select id="sport" name="sport" required>
+                <option value="" disabled selected>--vyberte možnosť--</option>
+                <option value="tennis" data-allowed-for="isic" data-price="15" style="display: none">Tennis +15€</option>
+                <option value="badminton" data-allowed-for="isic" data-price="10" style="display: none">Badminton +10€</option>
+                <option value="padel" data-allowed-for="isic" data-price="8" style="display: none">Padel +8€</option>
+                <option value="tennis" data-allowed-for="multisport" data-price="0" style="display: none">Tennis +0€</option>
+                <option value="badminton" data-allowed-for="multisport" data-price="0" style="display: none">Badminton +0€</option>
+                <option value="padel" data-allowed-for="multisport" data-price="0" style="display: none">Padel +0€</option>
+                <option value="tennis" data-allowed-for="none" data-price="25" style="display: none">Tennis +25€</option>
+                <option value="badminton" data-allowed-for="none" data-price="20" style="display: none">Badminton +20€</option>
+                <option value="padel" data-allowed-for="none" data-price="16" style="display: none">Padel +16€</option>
+            </select>
+            <span class="error" id="sport-error"></span>
+            </div>
+
+            <div class="one_field" id="courts" style="display: none">
+                <label for="court-type">Typ kurtu</label>
+                <select id="court-type" name="court_type" required>
+                    <option value="" disabled selected>--vyberte možnosť--</option>
+                    <option value="hard" data-allowed-for="isic" data-for-sport="tennis" data-price="0" style="display: none">Tvrdý povrch +0€</option>
+                    <option value="grass" data-allowed-for="isic" data-for-sport="tennis" data-price="2" style="display: none">Tráva +2€</option>
+                    <option value="clay" data-allowed-for="isic" data-for-sport="tennis" data-price="2" style="display: none">Antuka +2€</option>
+                    <option value="indoor" data-allowed-for="isic" data-for-sport="badminton" data-price="0" style="display: none">Vnútorný kurt +0€</option>
+                    <option value="indoor" data-allowed-for="isic" data-for-sport="padel" data-price="0" style="display: none">Vnútorný kurt +0€</option>
+                    <option value="outdoor" data-allowed-for="isic" data-for-sport="padel" data-price="0" style="display: none">Vonkajší kurt +0€</option>
+
+                    <option value="hard" data-allowed-for="multisport" data-for-sport="tennis" data-price="2" style="display: none">Tvrdý povrch +2€</option>
+                    <option value="grass" data-allowed-for="multisport" data-for-sport="tennis" data-price="5" style="display: none">Tráva +5€</option>
+                    <option value="clay" data-allowed-for="multisport" data-for-sport="tennis" data-price="5" style="display: none">Antuka +5€</option>
+                    <option value="indoor" data-allowed-for="multisport" data-for-sport="badminton" data-price="0" style="display: none">Vnútorný kurt +0€</option>
+                    <option value="indoor" data-allowed-for="multisport" data-for-sport="padel" data-price="0" style="display: none">Vnútorný kurt +0€</option>
+                    <option value="outdoor" data-allowed-for="multisport" data-for-sport="padel" data-price="0" style="display: none">Vonkajší kurt +0€</option>
+
+                    <option value="hard" data-allowed-for="none" data-for-sport="tennis" data-price="3" style="display: none">Tvrdý povrch +3€</option>
+                    <option value="grass" data-allowed-for="none" data-for-sport="tennis" data-price="5" style="display: none">Tráva +5€</option>
+                    <option value="clay" data-allowed-for="none" data-for-sport="tennis" data-price="5" style="display: none">Antuka +5€</option>
+                    <option value="indoor" data-allowed-for="none" data-for-sport="badminton" data-price="0" style="display: none">Vnútorný kurt +0€</option>
+                    <option value="indoor" data-allowed-for="none" data-for-sport="padel" data-price="0" style="display: none">Vnútorný kurt +0€</option>
+                    <option value="outdoor" data-allowed-for="none" data-for-sport="padel" data-price="2" style="display: none">Vonkajší kurt +2€</option>
+                </select>
+                <span class="error" id="court-type-error"></span>
+                <br>
+            </div>
+        </div>
+
+        <div class="form_row">
+            <div class="one_field">
+                <label for="activity-date">Dátum</label>
+                <input type="date" id="activity-date" name="activity_date" required>
+                <span class="error" id="activity-date-error"></span>
+            </div>
+            <div class="two_field one_field same_width">
+                <div class="one_field">
+                    <label for="time-from">Od</label>
+                    <input type="time" id="time-from" name="activity_time_from" required>
+                    <span class="error" id="time-from-error"></span>
+                </div>
+                <div class="one_field">
+                    <label for="time-to">Do</label>
+                    <input type="time" id="time-to" name="activity_time_to" required>
+                    <span class="error" id="time-to-error"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form_row">
+            <div class="one_field">
+                <label>Chcete si požičať vybavenie?</label>
+                <br>
+                <input type="radio" id="borrow-equipment" name="radio-equipment" value="yes">
+                <label for="borrow-equipment">Áno</label>
+                <br>
+                <input type="radio" id="no-equipment" name="radio-equipment" value="no" checked>
+                <label for="no-equipment">Nie</label>
+            </div>
+
+            <div class="one_field">
+                <label for="other-requirements">Iné požiadavky alebo ponznámky k objednávke</label>
+                <input type="checkbox" id="other-requirements" name="other">
+                <label for="other-textarea"></label>
+                <textarea id="other-textarea" style="display: none" maxlength=400></textarea>
+                <span class="remaining" id="other-textarea-remaining" style="display: none">400/400</span>
+            </div>
+        </div>
+
+        <div class="form_row">
+            <div class="one_field" id="equipment-list" style="display: none;">
+                <label>Vybavenie</label>
+                <br>
+                <input type="checkbox" id="racket" name="equipment" value="racket" data-price="15">
+                <label for="racket">Raketa +15€</label>
+                <br>
+                <input type="checkbox" id="shoes" name="equipment" value="shoes" data-price="10">
+                <label for="shoes">Obuv na vnútorný kurt +10€</label>
+                <br>
+                <!-- tennis equipment options -->
+                <div data-for-sport="tennis" style="display: none">
+                    <input type="checkbox" id="grass_shoes" name="equipment" value="grass_shoes" data-price="10">
+                    <label for="grass_shoes">Obuv na trávnatý kurt +10€</label>
+                    <br>
+
+                    <input type="checkbox" id="clay_shoes" name="equipment" value="clay_shoes" data-price="10">
+                    <label for="clay_shoes">Obuv na antukový kurt +10€</label>
+                    <br>
+
+                    <input type="checkbox" id="tennis_balls" name="equipment" value="tennis_balls" data-price="3">
+                    <label for="tennis_balls">Tenisové loptičky +3€</label>
+                </div>
+                <!-- badminton equipment options -->
+                <div data-for-sport="badminton" style="display: none">
+                    <input type="checkbox" id="shuttlecocks" name="equipment" value="badminton_shuttlecocks" data-price="4">
+                    <label for="shuttlecocks">Badmintonové košíky +4€</label>
+                </div>
+                <!-- padel equipment options -->
+                <div data-for-sport="padel" style="display: none">
+                    <input type="checkbox" id="padel_balls" name="equipment" value="padel_balls" data-price="3">
+                    <label for="padel_balls">Padel loptičky +3€</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="one_field">
+            <label>Cena</label>
+            <span id="price" data-price-for-court="0">0</span>€
+        </div>
+    </fieldset>
+
+    <input type="submit" value="Submit">
+
+    <div class="one_field">
+        <input type="checkbox" id="info" value="meno autora">
+        <label for="info">Zobraz info</label>
+        <br>
+        <label for="author-info"></label>
+        <textarea id="author-info" style="display: none;" readonly>Jan Kuzma</textarea>
+    </div>
+
+
+    <!-- Modal Structure -->
+    <div id="orderModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Potvrďte objednávku</h2>
+            <div class="order-details">
+                <h3>Osobné informácie</h3>
+                <p id="personal-info"></p>
+                <h3>Výber služby</h3>
+                <p id="service-info"></p>
+                <h4 id="final-price">Celková suma: </h4>
+            </div>
+            <button id="confirmOrder">Potvrdiť</button>
+            <button id="cancelOrder">Zrušiť</button>
+        </div>
+    </div>
+
+</form>
+<script src="assets/js/scripts.js"></script>
+</body>
+</html>

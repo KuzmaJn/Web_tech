@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Activity Form</title>
+</head>
+<body>
+
+<form action="https://example.com/submit_form" method="post">
+
+    <fieldset>
+        <legend>Personal Information</legend>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" required>
+        <br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+        <br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br>
+
+        <label for="sex">Sex:</label>
+        <select id="sex" name="sex" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Sport Activity</legend>
+
+        <label for="activity_date">Date:</label>
+        <input type="date" id="activity_date" name="activity_date" required>
+        <br>
+
+        <label for="activity_time">Time:</label>
+        <input type="time" id="activity_time" name="activity_time" required>
+        <br>
+
+        <label for="sport">Sport:</label>
+        <select id="sport" name="sport" required>
+            <option value="tennis">Tennis</option>
+            <option value="badminton">Badminton</option>
+            <option value="padel">Padel</option>
+        </select>
+        <br>
+
+        <label for="court_type">Type of Court:</label>
+        <select id="court_type" name="court_type" required>
+            <option value="hard">Hard Court (Tennis)</option>
+            <option value="grass">Grass Court (Tennis)</option>
+            <option value="clay">Clay Court (Tennis)</option>
+            <option value="indoor">Indoor Court (Badminton/Padel)</option>
+        </select>
+        <br>
+
+        <label for="borrow_equipment">Do you want to borrow equipment?</label>
+        <input type="checkbox" id="borrow_equipment" name="borrow_equipment" value="yes">
+        <br>
+
+        <div id="equipment_list" style="display: none;">
+            <label for="equipment">Equipment:</label>
+            <select id="equipment" name="equipment">
+                <option value="racket">Racket</option>
+                <option value="balls">Balls</option>
+                <option value="shoes">Shoes</option>
+            </select>
+            <br>
+        </div>
+    </fieldset>
+
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+    document.getElementById('borrow_equipment').addEventListener('change', function() {
+        var equipmentList = document.getElementById('equipment_list');
+        if (this.checked) {
+            equipmentList.style.display = 'block';
+        } else {
+            equipmentList.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
