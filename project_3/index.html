@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Learning Curves</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<canvas id="learningCurveChart" width="400" height="200"></canvas>
+
+<script>
+    var ctx = document.getElementById('learningCurveChart').getContext('2d');
+    var learningCurveChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['1 hour', '5 hours', '10 hours', '20 hours', '50 hours'],
+            datasets: [
+                {
+                    label: 'Chart.js',
+                    data: [3, 5, 7, 8, 9],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false
+                },
+                {
+                    label: 'Plotly',
+                    data: [2, 4, 6, 7, 8],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    fill: false
+                },
+                {
+                    label: 'Highcharts',
+                    data: [2, 4, 6, 7, 8],
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    fill: false
+                },
+                {
+                    label: 'ECharts',
+                    data: [1, 3, 5, 6, 8],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    fill: false
+                },
+                {
+                    label: 'Google Charts',
+                    data: [3, 5, 7, 8, 9],
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+
+<!--There will be my custom component-->
+<slider-with-number-input></slider-with-number-input>
+
+<script src="src/web-components/slider-component.js"></script>
+
+</body>
+</html>
