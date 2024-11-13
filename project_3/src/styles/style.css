@@ -6,7 +6,7 @@ body, html {
     flex-direction: column;
 }
 nav {
-    background-color: #F5F5F5;
+    background-color: #CCD3CA;
 }
 
 main {
@@ -39,7 +39,7 @@ div[class*="chart-container"]{
 
 /* Footer at the bottom of the viewport if not enough content */
 footer {
-    color: #F5F5F5;
-    background-color: #3F2305;
+    color: #111111;
+    background-color: #B5C0D0;
     margin-top: auto;
 }
