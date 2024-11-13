@@ -3,68 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="src/styles/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Learning Curves</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Grafy pomocou JS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="src/pages/students_results.html">Výsledky študentov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="src/pages/live_graph.html">Live graf</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<canvas id="learningCurveChart" width="400" height="200"></canvas>
+    <main>
 
-<script>
-    var ctx = document.getElementById('learningCurveChart').getContext('2d');
-    var learningCurveChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['1 hour', '5 hours', '10 hours', '20 hours', '50 hours'],
-            datasets: [
-                {
-                    label: 'Chart.js',
-                    data: [3, 5, 7, 8, 9],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
-                },
-                {
-                    label: 'Plotly',
-                    data: [2, 4, 6, 7, 8],
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    fill: false
-                },
-                {
-                    label: 'Highcharts',
-                    data: [2, 4, 6, 7, 8],
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    fill: false
-                },
-                {
-                    label: 'ECharts',
-                    data: [1, 3, 5, 6, 8],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    fill: false
-                },
-                {
-                    label: 'Google Charts',
-                    data: [3, 5, 7, 8, 9],
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    fill: false
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
+    </main>
 
+    <!-- Footer -->
+    <footer class="pt-4">
+        <div class="my-container">
+            <div class="row justify-content-center">
+                <!-- Company Info -->
+                <div class="col-md-6 mb-4">
+                    <h5 class="text-uppercase">Naša spoločnosť</h5>
+                    <p>Poskytujeme reálne dáta o výsledkoch úbohých študentov.</p>
+                </div>
 
-<!--There will be my custom component-->
-<slider-with-number-input></slider-with-number-input>
+                <!-- Links -->
+                <div class="col-md-6 mb-4">
+                    <h5 class="text-uppercase">Rýchle menu</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="nav-link active" aria-current="page" href="index.html">Domov</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="src/pages/students_results.html">Výsledky študentov</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="src/pages/live_graph.html">Live graf</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-center py-3">
+                    <p class="mb-0">&copy; 2024 Honzik Production</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<script src="src/web-components/slider-component.js"></script>
-
+    <!--bootstrap javascript source-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

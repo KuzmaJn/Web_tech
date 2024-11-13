@@ -1,4 +1,3 @@
-// TODO: make this class more readable and compact
 class SliderWithNumberInput extends HTMLElement {
     constructor() {
         super();
@@ -56,6 +55,7 @@ class SliderWithNumberInput extends HTMLElement {
         width: 10rem;
         position: relative;
         margin: auto;
+        margin-bottom: 1rem;
       }
       .checkbox {
         flex-direction: row;
@@ -115,6 +115,7 @@ class SliderWithNumberInput extends HTMLElement {
         this.numberInput.setAttribute('min', min);
         this.numberInput.setAttribute('max', max);
         this.numberInput.setAttribute('step', step);
+        this.setAttribute('value', '1');
         this.updateSlider_spanPosition();
         this.showInputs();
     }
@@ -124,6 +125,7 @@ class SliderWithNumberInput extends HTMLElement {
         this.slider.value = value;
         this.numberInput.value = value;
         this.slider_span.textContent = value;
+        this.value = value;
         this.updateSlider_spanPosition();
     }
 
