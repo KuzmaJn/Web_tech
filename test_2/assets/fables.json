@@ -1,0 +1,19 @@
+{
+    "fables": 
+    [
+        {
+            "id": 1,
+            "author": "Ezop",
+            "title": "O levovi a myške",
+            "story": "Lev je pyšné a silné zviera - kráľ zvierat. Raz, keď mu po tvári v spánku prebehla drobná myška, chytil ju mocnou labou a druhou sa zahnal, že ju rozdrví, taký bol nahnevaný. Myška zapišťala: „Mocný lev, nezabíjaj ma prosím a nechaj ma žiť. Ak ma pustíš, možno ti budem raz osožná.“ To leva celkom rozveselilo. Predstava, že také malé bezvýznamné zvieratko by mohlo niekedy pomôcť jemu - kráľovi zvierat, bola smiešna a tak sa zľutoval a pustil ju. O pár dní prišli do džungle poľovníci a nastražili siete na levov. Lev pri svojich potulkách sa do takej siete chytil. Ako tak smutne čakal na svoj osud, prišla k nemu malá myška, ktorú nedávno pustil. Myška sa dala do práce a prehrýzla v sieti oká, čo levovi umožnilo ujsť na slobodu.",
+            "moral": "Niekedy môžu aj malí a slabí pomôcť veľkým a silným."
+        },
+        {
+            "id": 2,
+            "author": "Ezop",
+            "title": "O zajacovi a korytnačke",
+            "story": "Zajac bol ako všetci rodáci rýchly bežec a neraz si kvôli tomu doberal starú korytnačku. - Aká si pomalá, vzdychol vždy, keď sa korytnačka vliekla okolo neho. - Nečudoval by som sa, keby si bola najpomalšie zviera na svete. Ty asi ani nevieš čo je to ponáhľať sa. Korytnačka odvetila: Myslím, že keby som musela, vedela by som sa pohybovať celkom rýchlo. A vyzerala celkom spokojne. Zajac sa rozosmial: To je dobré! Chceš si to rozdať v  pretekoch a poraziť ma? Korytnačka chvíľu rozmýšľala a napokon povedala: Áno, pretekajme a porazím ťa! Preteky vzbudili medzi ostatnými veľký záujem. Všetky zvieratá sa v určený deň poschádzali, aby sa pozreli ako líška odštartuje tieto zaujímavé preteky. Zajac nasadil na začiatku také tempo, že o chvíľu stratil všetkých z dohľadu. Čoskoro sa pred ním vynoril cieľ. Zrazu mu čosi prišlo na um a zastal. Počkám na korytnačku, kým sa chudera nedoplazí až sem a pred očami jej prebehnem cieľom. A tak si sadol pod strom a čoskoro zaspal. Stará korytnačka zatiaľ pomaly ale húževnato kráčala vpred, prešla popri strome a zajacovi a napokon dorazila do cieľa. Zajaca zobudili až ovácie, ktorými ostatné zvieratá vítali korytnačku.",
+            "moral": "Keď si vytrvalý, aj pomaly zájdeš do cieľa."        
+        }
+    ]
+}

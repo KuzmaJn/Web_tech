@@ -1,0 +1,119 @@
+[
+  {
+    "fileName": "IMG_0118.JPEG",
+    "title": "Vatikán",
+    "description": "Kupola Baziliky svätého Petra",
+    "date": "2023-01-30",
+    "gps": [41.902378, 12.464347],
+    "path": "src/assets/images/IMG_0118.JPEG",
+    "keywords": "Rím, Vatikán, Taliansko, mesto, architektúra, január"
+  },
+  {
+    "fileName": "IMG_0217.JPEG",
+    "title": "Bazilika",
+    "description": "Bazilika sv. Kozmu a Damiána",
+    "date": "2023-01-31",
+    "gps": [41.891883, 12.487299],
+    "path": "src/assets/images/IMG_0217.JPEG",
+    "keywords": "Rím, Forum Romanum, Taliansko, architektúra, január"
+  },
+  {
+    "fileName": "IMG_0221.JPEG",
+    "title": "Koloseum",
+    "description": "Koloseum zo severnej strany",
+    "date": "2023-01-31",
+    "gps": [41.891098, 12.491487],
+    "path": "src/assets/images/IMG_0221.JPEG",
+    "keywords": "Rím, Taliansko, architektúra, január"
+  },
+  {
+    "fileName": "IMG_0222.JPEG",
+    "title": "Koloseum",
+    "description": "Koloseum zo západnej strany",
+    "date": "2023-01-31",
+    "gps": [41.889862, 12.49038],
+    "path": "src/assets/images/IMG_0222.JPEG",
+    "keywords": "Rím, Taliansko, architektúra, január"
+  },
+  {
+    "fileName": "IMG_0236.JPEG",
+    "title": "Koloseum",
+    "description": "Koloseum z východnej strany",
+    "date": "2023-01-31",
+    "gps": [41.890318, 12.49398],
+    "path": "src/assets/images/IMG_0236.JPEG",
+    "keywords": "Rím, Taliansko, architektúra, január"
+  },
+  {
+    "fileName": "IMG_0274.JPEG",
+    "title": "Španielske schody",
+    "description": "Pohľad zo Španielskych schodov na Via de Condoti",
+    "date": "2023-01-31",
+    "gps": [41.906089, 12.483021],
+    "path": "src/assets/images/IMG_0274.JPEG",
+    "keywords": "Rím, Taliansko, západ slnka, január"
+  },
+  {
+    "fileName": "IMG_0561.JPEG",
+    "title": "Kráľova hoľa",
+    "description": "Pohľad na Tatry z Kráľovej holi",
+    "date": "2023-02-06",
+    "gps": [48.882778, 20.139137],
+    "path": "src/assets/images/IMG_0561.JPEG",
+    "keywords": "Slovensko, hory, Tatry, krajina, február"
+  },
+  {
+    "fileName": "IMG_0616.JPEG",
+    "title": "Pod Kráľovou hoľou",
+    "description": "Ja držím vysielač na Kráľovej holi",
+    "date": "2023-02-06",
+    "gps": [48.880033, 20.140923],
+    "path": "src/assets/images/IMG_0616.JPG",
+    "keywords": "Slovensko, hory, Tatry, krajina, február"
+  },
+  {
+    "fileName": "IMG_0775.JPEG",
+    "title": "Pod Vihorlatom",
+    "description": "Boli sme prví turisti v roku 2023, ktorí vyšli na Vihorlat",
+    "date": "2023-02-09",
+    "gps": [48.890858, 22.140788],
+    "path": "src/assets/images/IMG_0775.JPEG",
+    "keywords": "Slovensko, hory, sneh, február"
+  },
+  {
+    "fileName": "IMG_1467.JPEG",
+    "title": "Zámok Schönbrunn",
+    "description": "Pohľad na Viedeň",
+    "date": "2023-06-19",
+    "gps": [48.178942, 16.309031],
+    "path": "src/assets/images/IMG_1467.JPEG",
+    "keywords": "Rakúsko, Viedeň, mesto, architektúra, budovy, jún"
+  },
+  {
+    "fileName": "IMG_2488.JPEG",
+    "title": "Orebić",
+    "description": "More v Chorvátsku",
+    "date": "2023-08-23",
+    "gps": [42.981636, 17.212928],
+    "path": "src/assets/images/IMG_2488.JPEG",
+    "keywords": "Chorvátsko, more, voda, príroda, august"
+  },
+  {
+    "fileName": "IMG_3715.JPEG",
+    "title": "Týnsky chrám",
+    "description": "Praha Staromestské námestie",
+    "date": "2024-08-07",
+    "gps": [50.087516, 14.421751],
+    "path": "src/assets/images/IMG_3715.JPEG",
+    "keywords": "Česko, august, Praha, mesto, architektúra, kostol"
+  },
+  {
+    "fileName": "IMG_3744.JPEG",
+    "title": "Karlov most",
+    "description": "Malostranská mostecká věž",
+    "date": "2024-08-08",
+    "gps": [50.086786, 14.408935],
+    "path": "src/assets/images/IMG_3744.JPEG",
+    "keywords": "Česko, august, Praha, mesto, architektúra"
+  }
+]
