@@ -5,13 +5,35 @@ import L from 'leaflet';
 import locations from '../assets/meta.json';
 import * as turf from '@turf/turf';
 import Gallery from "@/components/Gallery.vue";
+import Lightbox from "@/components/Lightbox.vue";
 
+// premenna map aby bola dostupna ku kazdej funkcii
+let map = null;
+// Pole na uloženie zoskupených značiek podľa lokácie
 const groupedMarkers = ref([]);
+
+// Referencia na aktuálne vybranú fotografiu
 const selectedPhoto = ref(null);
+
+// Boolean na sledovanie, či je galéria otvorená
 let isGalleryOpen = ref(false);
+
+// Index aktuálne vybranej fotografie v galérii
 let currentIndex = ref(null);
+
+// Pole na uloženie všetkých fotografií
 let photos = ref([]);
+
+// Pole na uloženie filtrovaných fotografií podľa vybranej lokácie
 let filteredPhotos = ref([]);
+
+// premenne potrebne pre zobrazenie trasy
+let routeLayer = ref(null);
+let isRouteVisible = ref(false);
+let routeButton = ref("Zobraz trasu");
+const totalDist = ref(null);
+
+// vypocet ci dana fotografia patri do rovnakeho miesta
 function isWithinRadius(lat1, lon1, lat2, lon2, radius = 20000) {
   const from = turf.point([lon1, lat1]);
   const to = turf.point([lon2, lat2]);
@@ -20,6 +42,7 @@ function isWithinRadius(lat1, lon1, lat2, lon2, radius = 20000) {
   return distance <= radius;
 }
 
+// zoskupenie fotografii podla lokacie
 const groupLocations = () => {
   const groups = [];
 
@@ -43,11 +66,11 @@ const groupLocations = () => {
   groupedMarkers.value = groups;
 };
 
-
+// zobrazenie mapy a miest na mape
 onMounted(() => {
   groupLocations();
   console.log(groupedMarkers)
-  const map = L.map('map').setView([48.148598, 17.107748], 5);
+  map = L.map('map').setView([48.148598, 17.107748], 5);
   map.getPanes().mapPane.style.zIndex = '0';
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -67,19 +90,22 @@ onMounted(() => {
     })
   })
 });
+
 const closeGallery = () => {
   isGalleryOpen.value = false;
   selectedPhoto.value = null;
+  filteredPhotos.value = null;
 };
 
 const openLightbox = (photo, index) => {
   selectedPhoto.value = photo;
   currentIndex.value = index;
+
 };
+
 const closeLightbox = () => {
   selectedPhoto.value = null;
   currentIndex.value = null;
-  filteredPhotos.value = null;
 };
 
 const prevPhoto = () => {
@@ -95,10 +121,54 @@ const nextPhoto = () => {
     selectedPhoto.value = filteredPhotos.value[currentIndex.value];
   }
 };
+
+const toggleRoute = () => {
+  if (isRouteVisible.value) {
+    // Skryť trasu
+    if (routeLayer.value) {
+      routeLayer.value.remove();
+    }
+    isRouteVisible.value = false;
+    routeButton.value = "Zobraz trasu"
+  } else {
+    // Vykresliť trasu
+    const sortedLocations = [...locations].sort((a, b) => new Date(a.date) - new Date(b.date)); // Triedenie podľa dátumu
+    const routeCoordinates = sortedLocations.map(location => location.gps);
+
+    // Vytvor Polyline pre trasu
+    routeLayer.value = L.polyline(routeCoordinates, { color: 'blue' }).addTo(map);
+
+    // Priblížiť mapu na trasu
+    map.fitBounds(routeLayer.value.getBounds());
+
+    isRouteVisible.value = true;
+    routeButton.value = "Skry trasu"
+
+    totalDist.value = calculateRouteDistance(routeCoordinates);
+  }
+};
+
+const calculateRouteDistance = (coordinates) => {
+  let totalDistance = 0;
+  for (let i = 0; i < coordinates.length - 1; i++) {
+    const from = turf.point(coordinates[i]);
+    const to = turf.point(coordinates[i + 1]);
+    const options = { units: 'kilometers' };
+    totalDistance += turf.distance(from, to, options);
+  }
+  return totalDistance.toFixed(2); // Dĺžka v kilometroch
+};
 </script>
 
 <template>
   <div class="main">
+    <div class="route-box">
+      <span v-if="isRouteVisible" class="route-distance">Celková vzdialenosť: {{ totalDist }}</span>
+      <button class="route-btn" @click="toggleRoute">
+        {{ routeButton }}
+      </button>
+
+    </div>
     <div id="map" class="map"></div>
 
     <div v-if="isGalleryOpen" class="gallery-overlay" @click="closeGallery">
@@ -107,23 +177,17 @@ const nextPhoto = () => {
       </div>
     </div>
 
-    <div v-if="selectedPhoto" class="reuse-box lightbox" @click="closeLightbox">
-      <div class="reuse-box lightbox-content" @click.stop>
-        <div class="lightbox-description">
-          <h2>{{ selectedPhoto.title }}</h2>
-          <p>{{ selectedPhoto.description }}</p>
-          <p>{{ selectedPhoto.date }}</p>
-        </div>
-        <div class="reuse-box buttons">
-          <button class="slider" @click="prevPhoto"> < </button>
-          <button class="slider" @click="nextPhoto"> > </button>
-          <button @click="closeLightbox">Zavrieť</button>
-        </div>
-      </div>
-      <div class="reuse-box">
-        <img :src="`${selectedPhoto.path}`" :alt="selectedPhoto.title" />
-      </div>
-    </div>
+    <Lightbox
+        v-if="selectedPhoto"
+        :photo="selectedPhoto"
+        :index="currentIndex"
+        :photos="filteredPhotos"
+        @close="closeLightbox"
+        @prev="prevPhoto"
+        @next="nextPhoto"
+        :map="false"
+        :mini-map-visible="false"
+    ></Lightbox>
   </div>
 </template>
 
@@ -132,10 +196,12 @@ const nextPhoto = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .map {
+  margin-bottom: 0.25rem;
   border-radius: .5rem;
-  height: 80vh;
+  height: 70vh;
   width: 90vw;
   z-index: 1;
 }
@@ -153,47 +219,8 @@ const nextPhoto = () => {
   margin: 1rem;
 }
 
-.reuse-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-/* ---------------------- */
-/* Lightbox styles */
-/* ---------------------- */
-.lightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  flex-direction: column;
-  justify-content: center;
-  z-index: 999;
-}
-
-.lightbox-content {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 1rem;
-  width: 98%;
-  border-radius: 0.5rem;
-}
-
-h2, p {
-  font-size: 0.9rem;
-  padding: 0.05rem;
-  margin: 0.05rem;
-}
-
-.lightbox img {
-  width: auto;
-  max-height: 80vh;
-  margin: 1rem;
-}
-
 button {
+  min-width: 6.8rem;
   margin-left: 2rem;
   padding: 0.5rem 1rem;
   background: #007bff;
@@ -208,14 +235,11 @@ button:hover {
   background: #0056b3;
 }
 
-button.slider{
-  margin-left: 0.5rem;
-  background: rgba(255, 255, 255, 0);
-  color: black;
-  font-size: large;
-}
-button.slider:hover{
-  background: rgb(195, 195, 195);
-  font-size: x-large;
+.route-box{
+  width: 90vw;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 </style>

@@ -1,90 +1,210 @@
-<script setup>
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+<template>
+  <div>
+    <!-- Textový vstup na filtrovanie -->
+    <input
+        type="text"
+        v-model="searchQuery"
+        class="filter-input"
+        placeholder="Zadajte hľadaný výraz"
+        @input="filterImages"
+    />
+
+    <!-- Zobrazenie galérie s náhľadmi obrázkov -->
+    <div class="thumbnail-grid">
+      <div
+          v-for="(image, index) in filteredImages"
+          :key="index"
+          class="thumbnail-container"
+          @click="openModal(index)"
+      >
+        <img :src="image.path" :alt="image.title" class="thumbnail" />
+      </div>
+    </div>
+
+    <!-- Modálne okno na zobrazenie plného obrázku -->
+    <div v-if="isModalOpen" class="image-modal" @click="closeModal">
+      <div class="modal-content">
+        <img :src="images[activeImageIndex].path" :alt="images[activeImageIndex].title" />
+        <h3>{{ images[activeImageIndex].title }}</h3>
+        <p>{{ images[activeImageIndex].description }}</p>
+        <p>{{ images[activeImageIndex].dateTime }}</p>
+        <p>
+          Miesto: {{ images[activeImageIndex].gps.latitude }}, {{ images[activeImageIndex].gps.longitude }}
+        </p>
+        <button @click="startSlideshow">Spustiť slideshow</button>
+      </div>
+      <button class="close-modal" @click="closeModal">X</button>
+    </div>
+  </div>
+</template>
+
+<script>
+import { ref, computed, watch, onMounted } from 'vue';
+import galleryData from "../gallery.json"; // Načítanie dát z JSON súboru
+
+export default {
+  setup() {
+    const images = ref(galleryData);
+    const searchQuery = ref('');
+    const isModalOpen = ref(false);
+    const activeImageIndex = ref(null);
+    const filteredImages = computed(() => {
+      if (searchQuery.value === "") {
+        return images.value;
+      } else {
+        const searchStr = searchQuery.value.toLowerCase();
+        return images.value.filter((image) => {
+          return (
+              image.title.toLowerCase().includes(searchStr) ||
+              image.description.toLowerCase().includes(searchStr)
+          );
+        });
+      }
+    });
+
+    const openModal = (index) => {
+      activeImageIndex.value = index;
+      isModalOpen.value = true;
+    };
+
+    const closeModal = () => {
+      isModalOpen.value = false;
+    };
+
+    const filterImages = () => {
+      // Computed property will handle filtering
+    };
+
+    const startSlideshow = () => {
+      let index = activeImageIndex.value;
+      const totalImages = filteredImages.value.length;
+
+      // Slideshow funkcia
+      const slideshowInterval = setInterval(() => {
+        index = (index + 1) % totalImages; // Zabezpečí opakovanie cyklu
+        activeImageIndex.value = index;
+      }, 3000); // Zmena obrázkov každé 3 sekundy
+
+      // Možnosť zastaviť slideshow po kliknutí na obrázok
+      onMounted(() => {
+        closeModal();
+        clearInterval(slideshowInterval);
+      });
+    };
+
+    // Po zadaní hľadaného výrazu re-filterujeme obrázky
+    watch(searchQuery, filterImages);
+
+    return {
+      images,
+      searchQuery,
+      isModalOpen,
+      activeImageIndex,
+      filteredImages,
+      openModal,
+      closeModal,
+      filterImages,
+      startSlideshow
+    };
+  }
+};
 </script>
 
-<template>
-  <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Documentation</template>
+<style scoped>
+/* Základné štýly pre galériu */
 
-    Vue’s
-    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-    provides you with all information you need to get started.
-  </WelcomeItem>
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <ToolingIcon />
-    </template>
-    <template #heading>Tooling</template>
+.thumbnail-container {
+  cursor: pointer;
+  position: relative;
+}
 
-    This project is served and bundled with
-    <a href="https://vite.dev/guide/features.html" target="_blank" rel="noopener">Vite</a>. The
-    recommended IDE setup is
-    <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank" rel="noopener">Volar</a>. If
-    you need to test your components and web pages, check out
-    <a href="https://www.cypress.io/" target="_blank" rel="noopener">Cypress</a>
-    and
-    <a href="https://on.cypress.io/component" target="_blank" rel="noopener"
-      >Cypress Component Testing</a
-    >.
+.thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease, border 0.3s ease;
+}
 
-    <br />
+.thumbnail:hover {
+  transform: scale(1.05);
+  border: 2px solid #333;
+}
 
-    More instructions are available in <code>README.md</code>.
-  </WelcomeItem>
+.filter-input {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 1.1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  outline: none;
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <EcosystemIcon />
-    </template>
-    <template #heading>Ecosystem</template>
+.filter-input:focus {
+  border-color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
 
-    Get official tools and libraries for your project:
-    <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener">Pinia</a>,
-    <a href="https://router.vuejs.org/" target="_blank" rel="noopener">Vue Router</a>,
-    <a href="https://test-utils.vuejs.org/" target="_blank" rel="noopener">Vue Test Utils</a>, and
-    <a href="https://github.com/vuejs/devtools" target="_blank" rel="noopener">Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
-    <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
-    a visit.
-  </WelcomeItem>
+/* Modálne okno na zobrazenie plného obrázku */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Community</template>
+.image-modal img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
 
-    Got stuck? Ask your question on
-    <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Vue Land</a>, our official
-    Discord server, or
-    <a href="https://stackoverflow.com/questions/tagged/vue.js" target="_blank" rel="noopener"
-      >StackOverflow</a
-    >. You should also subscribe to
-    <a href="https://news.vuejs.org" target="_blank" rel="noopener">our mailing list</a>
-    and follow the official
-    <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
-    twitter account for latest news in the Vue world.
-  </WelcomeItem>
+.modal-content {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>Support Vue</template>
+.modal-content h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
 
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
-  </WelcomeItem>
-</template>
+.modal-content p {
+  font-size: 1.1em;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  background-color: darkred;
+}
+</style>
